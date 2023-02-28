@@ -7,4 +7,5 @@ using namespace std;
 struct Person {
     string firstName;
     string lastName;
+    string phoneNumber;
 };
