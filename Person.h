@@ -4,8 +4,9 @@
 
 using namespace std;
 
-struct Person {
-    string firstName;
-    string lastName;
-    string phoneNumber;
+class Person {
+    public:
+        string firstName;
+        string lastName;
+        string phoneNumber;
 };
