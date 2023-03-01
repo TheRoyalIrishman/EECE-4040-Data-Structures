@@ -3,6 +3,7 @@
 #include "Person.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -26,6 +27,12 @@ class Book {
             logbook = nullptr;
         }
 
-        void addEntry(Person newPerson);
-        void inorderTraversal(BST_Node * node);
+        void addEntry(Person newPerson); // already implemented
+        void inorderTraversal(BST_Node * node); // already implemented
+        void deleteEntry(string phoneNumber); // needs to be implemented
+        string findPhoneNumber(string fullName); // needs to be implemented
+        void changePhoneNumber(string fullName, string oldPhoneNumber); // needs to be implemented
+        void displayPhoneBook(); // needs to be implemented
+        void quitAndSavePhoneBook(); // needs to be implemented
+
 };
