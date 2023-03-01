@@ -13,23 +13,23 @@ void Book::addEntry(Person newPerson) {
         while (true) {
             parentNode = focusNode;
 
-        //     if (newPerson == focusNode->m_person) {
-        //         focusNode = focusNode->left;
+            if (newPerson < focusNode->m_person) {
+                focusNode = focusNode->left;
 
-        //         if (focusNode == nullptr) {
-        //             parentNode->left = newNode;
-        //             return;
-        //         }
-        //     } else {
-        //         focusNode = focusNode->right;
+                if (focusNode == nullptr) {
+                    parentNode->left = newNode;
+                    return;
+                }
+            } else {
+                focusNode = focusNode->right;
 
 
-        //         if (focusNode == nullptr) {
-        //             parentNode->right = newNode;
-        //             return;
-        //         }
-        //     }
-        // }
+                if (focusNode == nullptr) {
+                    parentNode->right = newNode;
+                    return;
+                }
+            }
+        }
     }
 }
 
