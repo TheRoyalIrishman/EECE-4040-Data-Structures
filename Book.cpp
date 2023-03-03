@@ -158,5 +158,7 @@ void Book::quitAndSavePhoneBook(BST_Node * rootNode, ofstream & outputFile) {
         outputFile << rootNode->m_person.firstName << " " << rootNode->m_person.lastName << " " << rootNode->m_person.phoneNumber << "\n";
         
         quitAndSavePhoneBook(rootNode->right, outputFile);
+
+        outputFile.close();
     }
 }
