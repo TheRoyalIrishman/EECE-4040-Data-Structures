@@ -13,51 +13,52 @@ int main() {
         // Based on user input, do the desired function
         switch (Option) {
             case 1:{
-                int FirstName;
-                int LastName;
+                string FirstName;
+                string LastName;
                 string PhoneNumber;
                 cout << "Please input the person's first name, last name, and phone number" << endl;
                 cin >> FirstName;
                 cin >> LastName;
                 cin >> PhoneNumber;
                 Person * NewPerson;
-                NewPerson.firstName = FirstName;
-                NewPerson.lastName = LastName;
-                NewPerson.phoneNumber = PhoneNumber;
-                NewBook->addEntry(NewPerson);
-            case 2:
-                int FirstName;
-                int LastName;
+                NewPerson->firstName = FirstName;
+                NewPerson->lastName = LastName;
+                NewPerson->phoneNumber = PhoneNumber;
+                NewBook->addEntry(* NewPerson);
+            }
+            case 2:{
+
+                string FirstName;
+                string LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
                 NewBook->deleteEntry(FirstName, LastName);
-            case 3:
-                int FirstName;
-                int LastName;
+            }
+            case 3:{
+                string FirstName;
+                string LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
-                NewBook->findPerson(FirstName, LastName);
-            case 4:
-                int FirstName;
-                int LastName;
+                NewBook->findPhoneNumber(FirstName, LastName);
+            }
+            case 4:{
+                string FirstName;
+                string LastName;
                 string NewPhoneNumber;
                 cout << "Please input the person's first name, last name, and phone number" << endl;
                 cin >> FirstName;
                 cin >> LastName;
                 cin >> NewPhoneNumber;
-                Person * NewPerson;
-                NewPerson.firstName = FirstName;
-                NewPerson.lastName = LastName;
-                NewPerson.phoneNumber = NewPhoneNumber;
-                NewBook->changePhoneNumber(NewPerson);
+                NewBook->changePhoneNumber(FirstName, LastName, NewPhoneNumber);
+            }
             case 5:
-                NewBook->inorderTraversal(NewBook);
+                NewBook->inorderTraversal(NewBook->logbook);
             case 6:
                 // Needs help
                 ofstream outputFile("textFile.txt");
-                NewBook->quitAndSavePhoneBook(NewBook, outputFile);
+                NewBook->quitAndSavePhoneBook(NewBook->logbook, outputFile);
                 Quit=true;
         }
     }
