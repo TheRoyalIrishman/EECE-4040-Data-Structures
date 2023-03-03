@@ -1,7 +1,6 @@
 #include <iostream>
-
-#include "Book.cpp"
-#include "Person.cpp"
+#include "Book.h"
+#include "Person.h"
 
 int main() {
     bool Quit = false;
@@ -13,7 +12,7 @@ int main() {
         cin >> Option;
         // Based on user input, do the desired function
         switch (Option) {
-            case 1:
+            case 1:{
                 int FirstName;
                 int LastName;
                 string PhoneNumber;
@@ -22,25 +21,28 @@ int main() {
                 cin >> LastName;
                 cin >> PhoneNumber;
                 Person * NewPerson;
-                NewPerson.firstName = FirstName;
-                NewPerson.lastName = LastName;
-                NewPerson.phoneNumber = PhoneNumber;
-                NewBook::addEntry(NewPerson);
-            case 2:
+                NewPerson->firstName = FirstName;
+                NewPerson->lastName = LastName;
+                NewPerson->phoneNumber = PhoneNumber;
+                NewBook->addEntry(NewPerson);
+            }
+            case 2:{
                 int FirstName;
                 int LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
-                NewBook::deleteEntry(FirstName, LastName);
-            case 3:
+                NewBook->deleteEntry(FirstName, LastName);
+            }
+            case 3:{
                 int FirstName;
                 int LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
-                NewBook::findPerson(FirstName, LastName);
-            case 4:
+                NewBook->findPerson(FirstName, LastName);
+            }
+            case 4:{
                 int FirstName;
                 int LastName;
                 string NewPhoneNumber;
@@ -49,15 +51,16 @@ int main() {
                 cin >> LastName;
                 cin >> NewPhoneNumber;
                 Person * NewPerson;
-                NewPerson.firstName = FirstName;
-                NewPerson.lastName = LastName;
-                NewPerson.phoneNumber = NewPhoneNumber;
-                NewBook::changePhoneNumber(NewPerson);
+                NewPerson->firstName = FirstName;
+                NewPerson->lastName = LastName;
+                NewPerson->phoneNumber = NewPhoneNumber;
+                NewBook->changePhoneNumber(NewPerson);
+            }
             case 5:
-                NewBook::inorderTraversal(NewBook);
+                NewBook->inorderTraversal(NewBook);
             case 6:
                 // Needs help
-                NewBook::quitAndSavePhoneBook(NewBook, );
+                NewBook->quitAndSavePhoneBook(NewBook, );
                 Quit=true;
         }
     }
