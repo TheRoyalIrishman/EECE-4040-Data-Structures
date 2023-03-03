@@ -51,7 +51,7 @@ class Book {
             string newPhoneNumber
         );                       // already implemented
         void displayPhoneBook(); // needs to be implemented
-        void quitAndSavePhoneBook(BST_Node *, ofstream &); // needs to be implemented
+        void quitAndSavePhoneBook(BST_Node *, ofstream &); // implemented
     private:
         // First element is the person in question, second element is the parent element
         pair<BST_Node *, BST_Node *> findPerson(const string& firstName, const string& lastName) const;
