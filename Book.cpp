@@ -135,3 +135,18 @@ void Book::deleteEntry(const string& firstName, const string& lastName) {
         entries.second->right = entries.first;
     }
 }
+
+void Book::changePhoneNumber(
+    const string& firstName,
+    const string& lastName,
+    string newPhoneNumber
+) {
+    BST_Node* currNode = findPerson(firstName, lastName).first;
+
+    if (currNode) {
+        currNode->m_person.phoneNumber = newPhoneNumber;
+    } else {
+        // It wasn't found
+        throw out_of_range("No person with the given name");
+    }
+}
