@@ -150,3 +150,13 @@ void Book::changePhoneNumber(
         throw out_of_range("No person with the given name");
     }
 }
+
+void Book::quitAndSavePhoneBook(BST_Node * rootNode, ofstream & outputFile) {
+    if (rootNode != nullptr) {
+        quitAndSavePhoneBook(rootNode->left, outputFile);
+
+        outputFile << rootNode->m_person.firstName << " " << rootNode->m_person.lastName << " " << rootNode->m_person.phoneNumber << "\n";
+        
+        quitAndSavePhoneBook(rootNode->right, outputFile);
+    }
+}
