@@ -41,7 +41,7 @@ class Book {
         }
 
         void addEntry(Person newPerson); // already implemented
-        void inorderTraversal(BST_Node * node) const; // already implemented
+        void inorderTraversal(BST_Node * node) const; // already implemented - not complete though
         void deleteEntry(const string& firstName, const string& lastName); // partially impleneted
         string findPhoneNumber(const string& firstName, const string& lastName) const; // already implemented
         void changePhoneNumber(string fullName, string oldPhoneNumber); // needs to be implemented
