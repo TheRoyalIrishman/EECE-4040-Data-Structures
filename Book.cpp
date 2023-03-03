@@ -118,9 +118,13 @@ void Book::deleteEntry(const string& firstName, const string& lastName) {
                 currentNode = currentNode->right;
             } else {
                 swap(nodeToDelete->m_person, currentNode->m_person);
+                previousNode->right = currentNode->left;
                 delete currentNode;
-                previousNode->right = nullptr;
-                break;
+                currentNode = nullptr;
+
+                // Because we used swap() to swap the person objects in-place,
+                // the child pointer changes below aren't necessary.
+                return;
             }
         }
     }
