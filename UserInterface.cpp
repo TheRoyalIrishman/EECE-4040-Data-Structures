@@ -5,7 +5,7 @@
 int main() {
     bool Quit = false;
     int Option;
-    Book * NewBook;
+    Book * NewBook = new Book();
     while (Quit==false) {
         // Ask for user input
         cout << "Please Enter Number of Option \n1. Add\n2. Delete\n3. Find\n4. Change\n5. Display\n6. Quit" << endl;
