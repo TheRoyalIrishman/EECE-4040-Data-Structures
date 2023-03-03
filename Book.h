@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -41,10 +42,12 @@ class Book {
 
         void addEntry(Person newPerson); // already implemented
         void inorderTraversal(BST_Node * node) const; // already implemented
-        void deleteEntry(string phoneNumber); // needs to be implemented
+        void deleteEntry(const string& firstName, const string& lastName); // partially impleneted
         string findPhoneNumber(const string& firstName, const string& lastName) const; // already implemented
         void changePhoneNumber(string fullName, string oldPhoneNumber); // needs to be implemented
         void displayPhoneBook(); // needs to be implemented
         void quitAndSavePhoneBook(); // needs to be implemented
-
+    private:
+        // First element is the person in question, second element is the parent element
+        pair<BST_Node *, BST_Node *> findPerson(const string& firstName, const string& lastName) const;
 };

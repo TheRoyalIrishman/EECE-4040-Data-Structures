@@ -45,23 +45,69 @@ void Book::inorderTraversal(BST_Node * nodePtr) const {
     }
 }
 
-string Book::findPhoneNumber(const string& firstName, const string& lastName) const {
+pair<BST_Node *, BST_Node *> Book::findPerson(const string& firstName, const string& lastName) const {
+    BST_Node * prevNode = nullptr;
     BST_Node * currNode = this->logbook;
     while (currNode) {
         if (lastName < currNode->m_person.lastName) {
+            prevNode = currNode;
             currNode = currNode->left;
         } else if (lastName > currNode->m_person.lastName) {
+            prevNode = currNode;
             currNode = currNode->right;
         } else if (firstName < currNode->m_person.firstName) {
+            prevNode = currNode;
             currNode = currNode->left;
         } else if (firstName > currNode->m_person.firstName) {
+            prevNode = currNode;
             currNode = currNode->right;
         } else {
             // both names match
-            return currNode->m_person.phoneNumber;
+            break;
         }
     }
+    return { currNode, prevNode };
+}
 
-    // It wasn't found
-    throw out_of_range("No person with the given name");
+string Book::findPhoneNumber(const string& firstName, const string& lastName) const {
+    BST_Node * currNode = findPerson(firstName, lastName).first;
+
+    if (currNode) {
+        return currNode->m_person.phoneNumber;
+    } else {
+        // It wasn't found
+        throw out_of_range("No person with the given name");
+    }
+}
+
+void Book::deleteEntry(const string& firstName, const string& lastName) {
+    auto entries = findPerson(firstName, lastName);
+    if (entries.first == nullptr) {
+        // Person doesn't exist
+        return;
+    }
+
+    bool isLeftChild =
+        entries.second != nullptr && entries.first == entries.second->left;
+
+    if (entries.first->left == nullptr) {
+        if (entries.first->right == nullptr) {
+            delete entries.first;
+            entries.first = nullptr;
+        } else {
+            delete entries.first;
+            entries.first = entries.first->right;
+        }
+    } else if (entries.first->right == nullptr) {
+        delete entries.first;
+        entries.first = entries.first->left;
+    } else {
+        // TODO: rotate children
+    }
+
+    if (isLeftChild) {
+        entries.second->left = entries.first;
+    } else if (entries.second) {
+        entries.second->right = entries.first;
+    }
 }
