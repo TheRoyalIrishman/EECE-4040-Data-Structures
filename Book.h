@@ -17,6 +17,13 @@ struct BST_Node {
         this->left = nullptr;
         this->right = nullptr;
     }
+
+    ~BST_Node() {
+        if (left)
+            delete left;
+        if (right)
+            delete right;
+    }
 };
 
 class Book {
@@ -25,6 +32,11 @@ class Book {
 
         Book() {
             logbook = nullptr;
+        }
+
+        ~Book() {
+            if (logbook)
+                delete logbook;
         }
 
         void addEntry(Person newPerson); // already implemented

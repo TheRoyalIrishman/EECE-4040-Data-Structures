@@ -9,4 +9,6 @@ class Person {
         string firstName;
         string lastName;
         string phoneNumber;
+
+        bool operator<(const Person& rhs) const;
 };
