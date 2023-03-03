@@ -1,4 +1,5 @@
 #include "Book.h"
+#include <stdexcept>
 
 void Book::addEntry(Person newPerson) {
     BST_Node * newNode = new BST_Node(newPerson);
@@ -34,7 +35,7 @@ void Book::addEntry(Person newPerson) {
 }
 
 // on how to do an inorder traversal of a BST
-void Book::inorderTraversal(BST_Node * nodePtr) {
+void Book::inorderTraversal(BST_Node * nodePtr) const {
     if (nodePtr != nullptr) {
         inorderTraversal(nodePtr->left);
         cout << "First Name: " << nodePtr->m_person.firstName << endl;
@@ -42,4 +43,25 @@ void Book::inorderTraversal(BST_Node * nodePtr) {
         cout << "Phone Number: " << nodePtr->m_person.phoneNumber << endl;
         inorderTraversal(nodePtr->right);
     }
+}
+
+string Book::findPhoneNumber(const string& firstName, const string& lastName) const {
+    BST_Node * currNode = this->logbook;
+    while (currNode) {
+        if (lastName < currNode->m_person.lastName) {
+            currNode = currNode->left;
+        } else if (lastName > currNode->m_person.lastName) {
+            currNode = currNode->right;
+        } else if (firstName < currNode->m_person.firstName) {
+            currNode = currNode->left;
+        } else if (firstName > currNode->m_person.firstName) {
+            currNode = currNode->right;
+        } else {
+            // both names match
+            return currNode->m_person.phoneNumber;
+        }
+    }
+
+    // It wasn't found
+    throw out_of_range("No person with the given name");
 }

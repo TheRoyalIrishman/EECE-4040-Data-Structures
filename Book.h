@@ -40,9 +40,9 @@ class Book {
         }
 
         void addEntry(Person newPerson); // already implemented
-        void inorderTraversal(BST_Node * node); // already implemented
+        void inorderTraversal(BST_Node * node) const; // already implemented
         void deleteEntry(string phoneNumber); // needs to be implemented
-        string findPhoneNumber(string fullName); // needs to be implemented
+        string findPhoneNumber(const string& firstName, const string& lastName) const; // already implemented
         void changePhoneNumber(string fullName, string oldPhoneNumber); // needs to be implemented
         void displayPhoneBook(); // needs to be implemented
         void quitAndSavePhoneBook(); // needs to be implemented
