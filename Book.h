@@ -44,7 +44,11 @@ class Book {
         void inorderTraversal(BST_Node * node) const; // already implemented - not complete though
         void deleteEntry(const string& firstName, const string& lastName); // partially impleneted
         string findPhoneNumber(const string& firstName, const string& lastName) const; // already implemented
-        void changePhoneNumber(string fullName, string oldPhoneNumber); // needs to be implemented
+        void changePhoneNumber(
+            const string& firstName,
+            const string& lastName,
+            string newPhoneNumber
+        );                       // already implemented
         void displayPhoneBook(); // needs to be implemented
         void quitAndSavePhoneBook(); // needs to be implemented
     private:
