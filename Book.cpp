@@ -109,6 +109,22 @@ void Book::deleteEntry(const string& firstName, const string& lastName) {
         entries.first = entries.first->left;
     } else {
         // TODO: rotate children
+
+        BST_Node * nodeToDelete;
+        BST_Node * currentNode = nodeToDelete->left;
+
+        while (true) {
+            if (currentNode->right) {
+                currentNode = currentNode->right;
+            } else if (currentNode->left) {
+                swap(currentNode, nodeToDelete);
+                break;
+            } else {
+                swap(currentNode, nodeToDelete);
+                delete currentNode;
+                break;
+            }
+        }
     }
 
     if (isLeftChild) {
