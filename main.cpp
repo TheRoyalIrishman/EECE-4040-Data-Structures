@@ -21,28 +21,25 @@ int main() {
                 cin >> LastName;
                 cin >> PhoneNumber;
                 Person * NewPerson;
-                NewPerson->firstName = FirstName;
-                NewPerson->lastName = LastName;
-                NewPerson->phoneNumber = PhoneNumber;
+                NewPerson.firstName = FirstName;
+                NewPerson.lastName = LastName;
+                NewPerson.phoneNumber = PhoneNumber;
                 NewBook->addEntry(NewPerson);
-            }
-            case 2:{
+            case 2:
                 int FirstName;
                 int LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
                 NewBook->deleteEntry(FirstName, LastName);
-            }
-            case 3:{
+            case 3:
                 int FirstName;
                 int LastName;
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
                 NewBook->findPerson(FirstName, LastName);
-            }
-            case 4:{
+            case 4:
                 int FirstName;
                 int LastName;
                 string NewPhoneNumber;
@@ -51,16 +48,16 @@ int main() {
                 cin >> LastName;
                 cin >> NewPhoneNumber;
                 Person * NewPerson;
-                NewPerson->firstName = FirstName;
-                NewPerson->lastName = LastName;
-                NewPerson->phoneNumber = NewPhoneNumber;
+                NewPerson.firstName = FirstName;
+                NewPerson.lastName = LastName;
+                NewPerson.phoneNumber = NewPhoneNumber;
                 NewBook->changePhoneNumber(NewPerson);
-            }
             case 5:
                 NewBook->inorderTraversal(NewBook);
             case 6:
                 // Needs help
-                NewBook->quitAndSavePhoneBook(NewBook, );
+                ofstream outputFile("textFile.txt");
+                NewBook->quitAndSavePhoneBook(NewBook, outputFile);
                 Quit=true;
         }
     }
