@@ -20,11 +20,11 @@ int main() {
                 cin >> FirstName;
                 cin >> LastName;
                 cin >> PhoneNumber;
-                Person * NewPerson;
-                NewPerson->firstName = FirstName;
-                NewPerson->lastName = LastName;
-                NewPerson->phoneNumber = PhoneNumber;
-                NewBook->addEntry(* NewPerson);
+                Person NewPerson;
+                NewPerson.firstName = FirstName;
+                NewPerson.lastName = LastName;
+                NewPerson.phoneNumber = PhoneNumber;
+                NewBook->addEntry(NewPerson);
             }
             case 2:{
 
