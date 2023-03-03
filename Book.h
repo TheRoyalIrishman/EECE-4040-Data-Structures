@@ -15,7 +15,7 @@ struct BST_Node {
     struct BST_Node * right;
 
     BST_Node(Person newPerson) {
-        this->m_person;
+        this->m_person = newPerson;
         this->left = nullptr;
         this->right = nullptr;
     }

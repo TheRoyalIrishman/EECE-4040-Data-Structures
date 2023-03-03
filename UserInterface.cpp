@@ -25,6 +25,7 @@ int main() {
                 NewPerson.lastName = LastName;
                 NewPerson.phoneNumber = PhoneNumber;
                 NewBook->addEntry(NewPerson);
+                break;
             }
             case 2:{
 
@@ -34,6 +35,7 @@ int main() {
                 cin >> FirstName;
                 cin >> LastName;
                 NewBook->deleteEntry(FirstName, LastName);
+                break;
             }
             case 3:{
                 string FirstName;
@@ -42,6 +44,7 @@ int main() {
                 cin >> FirstName;
                 cin >> LastName;
                 NewBook->findPhoneNumber(FirstName, LastName);
+                break;
             }
             case 4:{
                 string FirstName;
@@ -52,14 +55,17 @@ int main() {
                 cin >> LastName;
                 cin >> NewPhoneNumber;
                 NewBook->changePhoneNumber(FirstName, LastName, NewPhoneNumber);
+                break;
             }
             case 5:
                 NewBook->inorderTraversal(NewBook->logbook);
+                break;
             case 6:
                 // Needs help
                 ofstream outputFile("textFile.txt");
                 NewBook->quitAndSavePhoneBook(NewBook->logbook, outputFile);
-                Quit=true;
+                Quit = true;
+                break;
         }
     }
 }
