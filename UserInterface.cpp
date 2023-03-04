@@ -43,7 +43,11 @@ int main() {
                 cout << "Please input the person's first name and last name" << endl;
                 cin >> FirstName;
                 cin >> LastName;
-                NewBook->findPhoneNumber(FirstName, LastName);
+                try {
+                    cout << NewBook->findPhoneNumber(FirstName, LastName);
+                } catch (out_of_range) {
+                    cout << "No person was found with that name." << endl;
+                }
                 break;
             }
             case 4:{
@@ -54,18 +58,22 @@ int main() {
                 cin >> FirstName;
                 cin >> LastName;
                 cin >> NewPhoneNumber;
-                NewBook->changePhoneNumber(FirstName, LastName, NewPhoneNumber);
+                try {
+                    NewBook->changePhoneNumber(FirstName, LastName, NewPhoneNumber);
+                } catch (out_of_range) {
+                    cout << "No person was found with that name." << endl;
+                }
                 break;
             }
             case 5:
                 NewBook->inorderTraversal(NewBook->logbook);
                 break;
-            case 6:
-                // Needs help
+            case 6: {
                 ofstream outputFile("textFile.txt");
                 NewBook->quitAndSavePhoneBook(NewBook->logbook, outputFile);
                 Quit = true;
                 break;
+            }
         }
     }
 }
