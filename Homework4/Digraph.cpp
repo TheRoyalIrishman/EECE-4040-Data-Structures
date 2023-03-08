@@ -7,6 +7,18 @@
 
 using namespace std;
 
+// WARNING: This is O(n), not O(1) like it is for a vector/array
+int& elementAt(list<int>& lList, int index) {
+    int i = 0;
+    for (int& element : lList) {
+        if (i == index) {
+            return element;
+        }
+        ++i;
+    }
+    throw out_of_range("index out of range");
+}
+
 class Digraph {
     private:
         using node = pair<int, list<int>>;
