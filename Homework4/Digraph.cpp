@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <stack>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -14,5 +15,8 @@ class Digraph {
         unordered_map<int, vector<int>> digraph; // DAG variable
     
     public:
-        void userInterface();
+        // true if it succeeds, false if it fails
+        bool addEdge(int first, int second);
+        void removeEdge(int first, int second);
+        list<int> topologicalSort() const;
 };
