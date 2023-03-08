@@ -70,6 +70,13 @@ class Digraph {
             }
             return true;
         }
-        void removeEdge(int first, int second);
+        void removeEdge(int first, int second) {
+            int index = indexOf(first);
+            if (index == -1) {
+                // Nothing to do. The node doesn't exist, so the edge can't.
+                return;
+            }
+            m_graph[index].second.remove(second);
+        }
         list<int> topologicalSort() const;
 };
