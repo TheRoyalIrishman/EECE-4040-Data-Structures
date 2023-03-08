@@ -90,5 +90,39 @@ class Digraph {
             }
             m_graph[index].second.remove(second);
         }
-        list<int> topologicalSort() const;
+        list<int> topologicalSort() const {
+            // gives us a list with `m_graph.size()` zeros
+            list<int> initialList (m_graph.size(), 0);
+            int counter = m_graph.size() - 1;
+
+            // & here means capture initialList by reference instead of by value (by copy)
+            auto helper = [&](int vertex) -> void {
+                // ...
+                // for (int & element : initialList) {
+                //     element = 1;
+
+                //     for (node w : m_graph) {
+                        
+                //     }
+                // }
+
+                elementAt(initialList, 0) = 1;
+
+                // this also needs to still check adjacency list of v contains w
+                for (node w : m_graph) {
+
+                }
+            };
+
+            // int i = 0;
+            for (int& element : initialList) {
+                // ++i;
+                // if (i == 2) {
+                //     element = 1;
+                // }
+                // if (element == 0) {
+
+                // }
+            }
+        }
 };
