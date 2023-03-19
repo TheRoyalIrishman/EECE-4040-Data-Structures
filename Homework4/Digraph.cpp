@@ -58,6 +58,7 @@ class Digraph {
             return hasCycle(start, visited);
         }
     public:
+        int counter = m_graph.size() - 1;
         // true if it succeeds, false if it fails
         bool addEdge(int first, int second) {
             // find or add the first node
@@ -90,39 +91,33 @@ class Digraph {
             }
             m_graph[index].second.remove(second);
         }
+
+        void helperFunction(list<int> & initialList) {
+            list<int> topologicalList(m_graph.size(), 0);
+            for (int & element : initialList) {
+                element = 1;
+
+                for (node w : m_graph) {
+                    // don't know if this should be w.first or w.second
+                    if (elementAt(initialList, w.first) == 0) {
+                        helperFunction(initialList);
+                    }
+                }
+                // I THINK this should insert element into topologicalList?
+                // this would need confirmation, though
+                elementAt(topologicalList, element);
+                counter--;
+            }
+        }
+
         list<int> topologicalSort() const {
             // gives us a list with `m_graph.size()` zeros
-            list<int> initialList (m_graph.size(), 0);
-            int counter = m_graph.size() - 1;
+            list<int> initialList(m_graph.size(), 0);
 
-            // & here means capture initialList by reference instead of by value (by copy)
-            auto helper = [&](int vertex) -> void {
-                // ...
-                // for (int & element : initialList) {
-                //     element = 1;
-
-                //     for (node w : m_graph) {
-                        
-                //     }
-                // }
-
-                elementAt(initialList, 0) = 1;
-
-                // this also needs to still check adjacency list of v contains w
-                for (node w : m_graph) {
-
-                }
-            };
-
-            // int i = 0;
             for (int& element : initialList) {
-                // ++i;
-                // if (i == 2) {
-                //     element = 1;
-                // }
-                // if (element == 0) {
-
-                // }
+                if (elementAt(initialList, element) == 0) {
+                    // helperFunction(&initialList);
+                }
             }
         }
 };
