@@ -8,15 +8,25 @@
 using namespace std;
 
 // WARNING: This is O(n), not O(1) like it is for a vector/array
-int& elementAt(list<int>& lList, int index) {
+template<class T>
+T& elementAt(list<T>& lList, int index) {
     int i = 0;
-    for (int& element : lList) {
+    for (T& element : lList) {
         if (i == index) {
             return element;
         }
         ++i;
     }
     throw out_of_range("index out of range");
+}
+
+bool hasElement(const list<int>& searchList, int value) {
+    for (int element : searchList) {
+        if (element == value) {
+            return true;
+        }
+    }
+    return false;
 }
 
 class Digraph {
@@ -57,8 +67,33 @@ class Digraph {
             unordered_set<int> visited;
             return hasCycle(start, visited);
         }
+
+        void helperFunction(
+            list<bool>& mark,
+            list<int>& topologicalList,
+            int& counter,
+            int startNode
+        ) const {
+            int index = indexOf(startNode);
+            if (index == -1) {
+                // maybe throw?
+                return;
+            }
+            list<int> adjacencyList = m_graph[index].second;
+
+            for (bool& element : mark) {
+                element = true;
+
+                for (node w : m_graph) {
+                    if (hasElement(adjacencyList, w.first) && !elementAt(mark, w.first)) {
+                        helperFunction(mark, topologicalList, w.first, counter);
+                    }
+                }
+                elementAt(topologicalList, counter) = startNode;
+            }
+        }
+
     public:
-        int counter = m_graph.size() - 1;
         // true if it succeeds, false if it fails
         bool addEdge(int first, int second) {
             // find or add the first node
@@ -92,32 +127,23 @@ class Digraph {
             m_graph[index].second.remove(second);
         }
 
-        void helperFunction(list<int> & initialList) {
-            list<int> topologicalList(m_graph.size(), 0);
-            for (int & element : initialList) {
-                element = 1;
-
-                for (node w : m_graph) {
-                    // don't know if this should be w.first or w.second
-                    if (elementAt(initialList, w.first) == 0) {
-                        helperFunction(initialList);
-                    }
-                }
-                // I THINK this should insert element into topologicalList?
-                // this would need confirmation, though
-                elementAt(topologicalList, element);
-                counter--;
-            }
-        }
-
         list<int> topologicalSort() const {
             // gives us a list with `m_graph.size()` zeros
-            list<int> initialList(m_graph.size(), 0);
+            list<int> topologicalList(m_graph.size(), 0);
+            list<bool> mark(m_graph.size(), false);
 
-            for (int& element : initialList) {
-                if (elementAt(initialList, element) == 0) {
-                    // helperFunction(&initialList);
+            int counter = m_graph.size() - 1;
+
+            int i = 0;
+            for (bool& element : mark) {
+                if (!elementAt(mark, element)) {
+                    helperFunction(mark, topologicalList, i, counter);
                 }
+                ++i;
             }
+
+            return topologicalList;
         }
 };
+
+int main() {}
