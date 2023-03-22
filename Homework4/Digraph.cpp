@@ -77,7 +77,7 @@ class Digraph {
             int index = indexOf(startNode);
             if (index == -1) {
                 // maybe throw?
-                return;
+                throw out_of_range("index does not exist");
             }
             list<int> adjacencyList = m_graph[index].second;
 
