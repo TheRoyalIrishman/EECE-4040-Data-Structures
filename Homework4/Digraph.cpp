@@ -5,6 +5,7 @@
 #include <list>
 #include <unordered_set>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -77,7 +78,6 @@ class Digraph {
         ) const {
             int index = indexOf(startNode);
             if (index == -1) {
-                // maybe throw?
                 throw out_of_range("index does not exist");
             }
             list<int> adjacencyList = m_graph[index].second;
@@ -87,10 +87,16 @@ class Digraph {
 
                 for (node w : m_graph) {
                     if (hasElement(adjacencyList, w.first) && !elementAt(mark, w.first)) {
-                        helperFunction(mark, topologicalList, w.first, counter);
+                        helperFunction(mark, topologicalList, counter, w.first);
                     }
                 }
-                elementAt(topologicalList, counter) = startNode;
+
+                if (counter < 0) {
+                    cout << "less than 0" << endl;
+                    return;
+                }
+
+                elementAt(topologicalList, counter--) = startNode;
             }
         }
 
@@ -137,8 +143,8 @@ class Digraph {
 
             int i = 0;
             for (bool& element : mark) {
-                if (!elementAt(mark, element)) {
-                    helperFunction(mark, topologicalList, i, counter);
+                if (!element) {
+                    helperFunction(mark, topologicalList, counter, i);
                 }
                 ++i;
             }
@@ -159,15 +165,17 @@ int main() {
     string StringTask7;
     string StringTask8;
     cout << "Please Enter 8 tasks" << endl;
-    cin >> StringTask1;
-    cin >> StringTask2;
-    cin >> StringTask3;
-    cin >> StringTask4;
-    cin >> StringTask5;
-    cin >> StringTask6;
-    cin >> StringTask7;
-    cin >> StringTask8;
-    string array[8] = {StringTask1, StringTask2, StringTask3, StringTask4, StringTask5, StringTask6, StringTask7, StringTask8};
+    getline(cin, StringTask1);
+    getline(cin, StringTask2);
+    getline(cin, StringTask3);
+    getline(cin, StringTask4);
+    getline(cin, StringTask5);
+    getline(cin, StringTask6);
+    getline(cin, StringTask7);
+    getline(cin, StringTask8);
+
+    string array[8] = {StringTask1, StringTask2, StringTask3, StringTask4,
+                       StringTask5, StringTask6, StringTask7, StringTask8};
     int Option;
     while (Stay_Alive) {
         // Ask for user input
@@ -182,7 +190,6 @@ int main() {
                 cin >> FirstTask;
                 cin >> SecondTask;
                 New_Digraph->addEdge(FirstTask, SecondTask);
-                New_Digraph->topologicalSort();
                 break;
             }
             case 2:{
@@ -192,13 +199,18 @@ int main() {
                 cin >> FirstTask;
                 cin >> SecondTask;
                 New_Digraph->removeEdge(FirstTask, SecondTask);
-                New_Digraph->topologicalSort();
                 break;
             }
             case 3: {
                 ofstream outputFile("HW4textFile.txt");
-                outputFile << New_Digraph;
-                outputFile.close();
+                try {
+                    list<int> sorted = New_Digraph->topologicalSort();
+                    for (int value : sorted) {
+                        outputFile << array[value - 1] << endl;
+                    }
+                } catch (exception& e) {
+                    cout << e.what() << endl;
+                }
                 Stay_Alive = false;
                 break;
             }
