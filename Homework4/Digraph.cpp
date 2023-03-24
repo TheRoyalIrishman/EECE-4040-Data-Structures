@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <unordered_set>
+#include <fstream>
 
 using namespace std;
 
@@ -146,4 +147,61 @@ class Digraph {
         }
 };
 
-int main() {}
+int main() {
+    bool Stay_Alive = true;
+    Digraph * New_Digraph = new Digraph();
+    string StringTask1;
+    string StringTask2;
+    string StringTask3;
+    string StringTask4;
+    string StringTask5;
+    string StringTask6;
+    string StringTask7;
+    string StringTask8;
+    cout << "Please Enter 8 tasks" << endl;
+    cin >> StringTask1;
+    cin >> StringTask2;
+    cin >> StringTask3;
+    cin >> StringTask4;
+    cin >> StringTask5;
+    cin >> StringTask6;
+    cin >> StringTask7;
+    cin >> StringTask8;
+    string array[8] = {StringTask1, StringTask2, StringTask3, StringTask4, StringTask5, StringTask6, StringTask7, StringTask8};
+    int Option;
+    while (Stay_Alive) {
+        // Ask for user input
+        cout << "Please Enter Number of Option \n1. Add\n2. Remove\n3. Quit" << endl;
+        cin >> Option;
+        // Based on user input, do the desired function
+        switch (Option) {
+            case 1:{
+                int FirstTask;
+                int SecondTask;
+                cout << "Please input the first task, then the second task" << endl;
+                cin >> FirstTask;
+                cin >> SecondTask;
+                New_Digraph->addEdge(FirstTask, SecondTask);
+                New_Digraph->topologicalSort();
+                break;
+            }
+            case 2:{
+                int FirstTask;
+                int SecondTask;
+                cout << "Please input the first task, then the second task" << endl;
+                cin >> FirstTask;
+                cin >> SecondTask;
+                New_Digraph->removeEdge(FirstTask, SecondTask);
+                New_Digraph->topologicalSort();
+                break;
+            }
+            case 3: {
+                ofstream outputFile("HW4textFile.txt");
+                outputFile << New_Digraph;
+                outputFile.close();
+                Stay_Alive = false;
+                break;
+            }
+        }
+    }
+}
